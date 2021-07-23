@@ -4,9 +4,7 @@ import sys
 
 
 
-#hihihihihi
-#hello
-
+#calculates the number of registrations
 def numberOfReg(fileloc):
     #open workbook
     wb = openpyxl.load_workbook(fileloc)
@@ -25,7 +23,7 @@ def numberOfReg(fileloc):
             #print(sheet[cell].value)  
     print("TOTAL NUMBER OF REGISTRATIONS: ", numReg)
 
-
+#calculates all the half day registrations and prints it out
 def half(fileloc):
     wb = openpyxl.load_workbook(fileloc)
 
@@ -91,6 +89,8 @@ def half(fileloc):
     print("NUMBER OF HALF DAY PM LEVEL 4:", halfpm4, "registrations")
     print("NUMBER OF HALF DAY PM LEVEL 5:", halfpm5, "registrations")
     print("NUMBER OF HALF DAY PM LEVEL 6:", halfpm6, "registrations")
+
+#calculates all the allday registrations and prints it out
 def allday(fileloc):
     wb = openpyxl.load_workbook(fileloc)
 
@@ -130,45 +130,64 @@ def allday(fileloc):
     print("NUMBER OF ALL DAY LEVEL 5:", all5, "registrations")
     print("NUMBER OF ALL DAY LEVEL 6:", all6, "registrations")
 
+#copies all the half day am and all day in a file
 def copyRow(fileloc,filepath):
+    #opening workbook
     wb = openpyxl.load_workbook(fileloc)
 
+    #opening proper sheet
     sheet = wb.get_sheet_by_name('Class List')
 
+    #setting variables
     sh = wb.active
 
+    #setting variables for the new excel sheet
     wb2 = openpyxl.Workbook()
-
-    #filepath = (r"c:\Users\rober\Desktop\test2.xlsx")
-
     ws2 = wb2.active
-
+    ws2.title = "Class List"
     ws3 = wb2.create_sheet(0)
-
-    ws3.title = "Class List"
+    ws3.title = "AM & AD"
+    ws4 = wb2.create_sheet(0)
+    ws4.title = "PM & AD"
 
     #max row and max column
     mr = sh.max_row
     mc = sh.max_column 
     for j in range (1, mc + 1):
-        c = sh.cell(row = 5, column = j)
-        ws2.cell(row = 5, column = j).value = c.value
-        #for i in range(7, sh.max_row+7):
-            #cell1 = 'I' + str(i)
-            #cell = 'A' + str(i)
-            #if isinstance(sheet[cell].value, int) == True :
-                #if sheet[cell1].value == "Bike All (main price): 09:00 AM - 04:00 PM" or sheet[cell1].value == "Bike Half (main price): 09:00 AM - 12:00 PM":
-                    #print(sheet[cell].value)
-    
+        for k in range (1, 6):
+            c = sh.cell(row = k, column = j)
+            ws2.cell(row = k, column = j).value = c.value
+            ws3.cell(row = k, column = j).value = c.value
+            ws4.cell(row = k, column = j).value = c.value
+
+
+    rowTrackingAM = 6
+    rowTrackingPM = 6
     for i in range(7, mr+7):
         orderNum = 'A' + str(i)
         regTime = 'I' + str(i)
+
+        #COPYING ORIGINAL SET INTO FILE
+        for OG in range (1, mc + 1):
+            c = sh.cell(row = i, column = OG)
+            ws2.cell(row = i, column = OG).value = c.value
+
+        #CHECKING IF THERE IS A REGISTRATION
         if isinstance(sheet[orderNum].value, int) == True :
+        #COPYING FOR AM AND AD
             if sheet[regTime].value == "Bike All (main price): 09:00 AM - 04:00 PM" or sheet[regTime].value == "Bike Half (main price): 09:00 AM - 12:00 PM": 
+                rowTrackingAM += 1
                 for j in range (1, mc + 1):
-                    for x in range(7, mr+7):
-                        c = sh.cell(row = i, column = j)
-                        ws2.cell(row = i, column = j).value = c.value
+                    #for x in range(7, mr+7):
+                    c = sh.cell(row = i, column = j)
+                    ws3.cell(row = rowTrackingAM, column = j).value = c.value
+
+            if sheet[regTime].value == "Bike All (main price): 09:00 AM - 04:00 PM" or sheet[regTime].value == "Bike Half (main price): 01:00 PM - 04:00 PM":
+                rowTrackingPM += 1 
+                for k in range (1, mc + 1):
+                    #for x in range(7, mr+7):
+                    c = sh.cell(row = i, column = k)
+                    ws4.cell(row = rowTrackingPM, column = k).value = c.value
     
     
     
