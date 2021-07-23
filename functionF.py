@@ -16,7 +16,7 @@ def numberOfReg(fileloc):
     sh = wb.active
     numReg = 0
 
-    for i in range(7, sh.max_row+7):
+    for i in range(7, sh.max_row+1):
         cell = 'A' + str(i)
         if isinstance(sheet[cell].value, int) == True :
             numReg += 1
@@ -45,7 +45,7 @@ def half(fileloc):
     halfpm5 = 0
     halfpm6 = 0
 
-    for i in range(7, sh.max_row+7):
+    for i in range(7, sh.max_row+1):
         cell1 = 'I' + str(i)
         cell2 = 'H' + str(i)
         
@@ -105,7 +105,7 @@ def allday(fileloc):
     all5 = 0
     all6 = 0
 
-    for i in range(7, sh.max_row+7):
+    for i in range(7, sh.max_row+1):
         cell1 = 'I' + str(i)
         cell2 = 'H' + str(i)
 
@@ -143,12 +143,21 @@ def copyRow(fileloc,filepath):
 
     #setting variables for the new excel sheet
     wb2 = openpyxl.Workbook()
+
     ws2 = wb2.active
     ws2.title = "Class List"
+
     ws3 = wb2.create_sheet(0)
     ws3.title = "AM & AD"
+
     ws4 = wb2.create_sheet(0)
     ws4.title = "PM & AD"
+
+    ws5 = wb2.create_sheet(0)
+    ws5.title = "ALPHA AM & AD"
+
+    ws6 = wb2.create_sheet(0)
+    ws6.title = "ALPHA PM & AD"
 
     #max row and max column
     mr = sh.max_row
@@ -163,7 +172,7 @@ def copyRow(fileloc,filepath):
 
     rowTrackingAM = 6
     rowTrackingPM = 6
-    for i in range(7, mr+7):
+    for i in range(7, mr+1):
         orderNum = 'A' + str(i)
         regTime = 'I' + str(i)
 
@@ -181,16 +190,24 @@ def copyRow(fileloc,filepath):
                     #for x in range(7, mr+7):
                     c = sh.cell(row = i, column = j)
                     ws3.cell(row = rowTrackingAM, column = j).value = c.value
-
+        #ALPHA AM AND AD
+                for m in range (2, mc + 1):
+                    #for x in range(7, mr+7):
+                    c = sh.cell(row = i, column = m)
+                    ws5.cell(row = rowTrackingAM, column = m-1).value = c.value
+        #COPYING FOR PM AND AD
             if sheet[regTime].value == "Bike All (main price): 09:00 AM - 04:00 PM" or sheet[regTime].value == "Bike Half (main price): 01:00 PM - 04:00 PM":
                 rowTrackingPM += 1 
                 for k in range (1, mc + 1):
                     #for x in range(7, mr+7):
                     c = sh.cell(row = i, column = k)
                     ws4.cell(row = rowTrackingPM, column = k).value = c.value
+        #ALPHA PM AND AD
+                for l in range (2, mc + 1):
+                    #for x in range(7, mr+7):
+                    c = sh.cell(row = i, column = l)
+                    ws6.cell(row = rowTrackingPM, column = l-1).value = c.value
     
-    
-    
-    
+
     wb2.save(filepath)
 
