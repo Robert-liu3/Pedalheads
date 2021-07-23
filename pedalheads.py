@@ -2,14 +2,19 @@ import openpyxl
 import sys
 from functionF import *
 
-FILE = (r"c:\Users\rober\Desktop\list.xlsx")
-numberOfReg(FILE)
+#FILE = (r"c:\Users\rober\Desktop\list.xlsx")
+#C:\Users\Robert Liu\Desktop
+
+FILE = input("ENTER PATH OF FILE (WITH FILE):")
+filepath = input("ENTER NEW FILE (WITH PATH):")
+
+numberOfReg(str(FILE))
 #hello
-half(FILE) 
+half(str(FILE)) 
 
-allday(FILE)
+allday(str(FILE))
 
-copyRow(FILE)
+copyRow(str(FILE),filepath)
 
 exit()
 

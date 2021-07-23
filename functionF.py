@@ -130,7 +130,7 @@ def allday(fileloc):
     print("NUMBER OF ALL DAY LEVEL 5:", all5, "registrations")
     print("NUMBER OF ALL DAY LEVEL 6:", all6, "registrations")
 
-def copyRow(fileloc):
+def copyRow(fileloc,filepath):
     wb = openpyxl.load_workbook(fileloc)
 
     sheet = wb.get_sheet_by_name('Class List')
@@ -139,7 +139,7 @@ def copyRow(fileloc):
 
     wb2 = openpyxl.Workbook()
 
-    filepath = (r"c:\Users\rober\Desktop\test2.xlsx")
+    #filepath = (r"c:\Users\rober\Desktop\test2.xlsx")
 
     ws2 = wb2.active
 
