@@ -4,8 +4,8 @@ from functionF import *
 
 #FILE = (r"c:\Users\rober\Desktop\list.xlsx")
 
+#C:\Users\Robert Liu\Desktop\list2.xlsx
 #C:\Users\Robert Liu\Desktop\list.xlsx
-#C:\Users\Robert Liu\Desktop\test.xlsx
 
 
 FILE = input("ENTER PATH OF FILE (WITH FILE):")
