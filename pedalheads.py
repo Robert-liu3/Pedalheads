@@ -1,5 +1,6 @@
 import openpyxl
 import sys
+import pandas
 from functionF import *
 
 #FILE = (r"c:\Users\rober\Desktop\list.xlsx")
