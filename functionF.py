@@ -162,13 +162,16 @@ def copyRow(fileloc,filepath):
     #max row and max column
     mr = sh.max_row
     mc = sh.max_column 
-    for j in range (1, mc + 1):
-        for k in range (1, 6):
+    for k in range (1, 6):
+        for j in range (1, mc + 1):
             c = sh.cell(row = k, column = j)
             ws2.cell(row = k, column = j).value = c.value
             ws3.cell(row = k, column = j).value = c.value
             ws4.cell(row = k, column = j).value = c.value
-
+        for alphaC in range (2, mc + 1):
+            alpha = sh.cell(row = k, column = alphaC)
+            ws5.cell(row = k, column = alphaC-1).value = alpha.value
+            ws6.cell(row = k, column = alphaC-1).value = alpha.value
 
     rowTrackingAM = 6
     rowTrackingPM = 6
