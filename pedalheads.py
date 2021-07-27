@@ -1,5 +1,7 @@
 import openpyxl
 import sys
+import pandas
+import PySimpleGUI as sg
 from functionF import *
 
 #FILE = (r"c:\Users\rober\Desktop\list.xlsx")
@@ -8,9 +10,33 @@ from functionF import *
 #C:\Users\Robert Liu\Desktop\list.xlsx
 
 
-FILE = input("ENTER PATH OF FILE (WITH FILE):")
+#variables with names and buttons
+input_file_path1 = [sg.Text("INSERT FILE LOCATION"), sg.In(size=(25,1), enable_events=True, key = "-FILE1-")]
+#button1 = [sg.Button("Submit file")]
+input_file_path2 = [sg.Text("INSERT NEW FILE LOCATION"), sg.In(size=(25,1), enable_events=True, key = "-FILE2-")]
+button = [sg.Button("Generate file")]
 
-filepath = input("ENTER NEW FILE (WITH PATH):")
+layout = [
+    [
+        input_file_path1,
+        input_file_path2, button,
+    ]
+]
+#variables that are windows
+window = sg.Window("AUTOMATIC REGISTRATION", layout, margins=(300,100))
+while True:
+    event, values = window.read()
+    if event == "Generate file":
+        FILE = values["-FILE1-"]
+        filepath = values["-FILE2-"]
+        break
+    if event == sg.WIN_CLOSED:
+        break
+window.close()
+
+#FILE = input("ENTER PATH OF FILE (WITH FILE):")
+
+#filepath = input("ENTER NEW FILE (WITH PATH):")
 
 try:
     numberOfReg(str(FILE))

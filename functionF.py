@@ -1,5 +1,6 @@
 #reading excel files
 import openpyxl
+import pandas as pd
 import sys
 
 
@@ -159,6 +160,9 @@ def copyRow(fileloc,filepath):
     ws6 = wb2.create_sheet(0)
     ws6.title = "ALPHA PM & AD"
 
+    #pandas section
+    #df = pd.read_excel('fileloc')
+    #df.sort_index(ascending=True)
     #max row and max column
     mr = sh.max_row
     mc = sh.max_column 
@@ -190,11 +194,13 @@ def copyRow(fileloc,filepath):
                     #for x in range(7, mr+7):
                     c = sh.cell(row = i, column = j)
                     ws3.cell(row = rowTrackingAM, column = j).value = c.value
+
         #ALPHA AM AND AD
                 for m in range (2, mc + 1):
                     #for x in range(7, mr+7):
                     c = sh.cell(row = i, column = m)
                     ws5.cell(row = rowTrackingAM, column = m-1).value = c.value
+                    #df.sort_index(ascending=True)
         #COPYING FOR PM AND AD
             if sheet[regTime].value == "Bike All (main price): 09:00 AM - 04:00 PM" or sheet[regTime].value == "Bike Half (main price): 01:00 PM - 04:00 PM":
                 rowTrackingPM += 1 
@@ -207,6 +213,7 @@ def copyRow(fileloc,filepath):
                     #for x in range(7, mr+7):
                     c = sh.cell(row = i, column = l)
                     ws6.cell(row = rowTrackingPM, column = l-1).value = c.value
+                    #df.sort_index(ascending=True)
     
 
     wb2.save(filepath)
