@@ -3,6 +3,8 @@ import sys
 import PySimpleGUI as sg
 from functionF import *
 
+
+
 #FILE = (r"c:\Users\rober\Desktop\list.xlsx")
 
 #C:\Users\Robert Liu\Desktop\list.xlsx
