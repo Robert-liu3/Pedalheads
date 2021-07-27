@@ -1,13 +1,12 @@
 import openpyxl
 import sys
-import pandas
 import PySimpleGUI as sg
 from functionF import *
 
 #FILE = (r"c:\Users\rober\Desktop\list.xlsx")
 
-#C:\Users\Robert Liu\Desktop\list2.xlsx
 #C:\Users\Robert Liu\Desktop\list.xlsx
+#C:\Users\Robert Liu\Desktop\test.xlsx
 
 
 #variables with names and buttons
