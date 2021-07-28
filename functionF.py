@@ -1,5 +1,6 @@
 #reading excel files
 import openpyxl
+import win32com.client
 import sys
 
 
@@ -210,7 +211,27 @@ def copyRow(fileloc,filepath):
                     #for x in range(7, mr+7):
                     c = sh.cell(row = i, column = l)
                     ws6.cell(row = rowTrackingPM, column = l-1).value = c.value
-    
+    #putting alpha sheets in alphabetical order
 
+    rangeALPHAAM = 'A6:A' + str(ws5.max_row)
+    
+    #ws5.Range(rangeALPHAAM).Sort(Key1=ws5.Range('A5'), Order1=1, Orientation=1)
+    
+    #creating a new file
     wb2.save(filepath)
 
+
+def orderSorting(filepath):
+    #not sure what this does
+    excel = win32com.client.Dispatch("Excel.Application")
+
+    #opening the excel file that was JUST created from the previous function
+    wb = excel.Workbooks.Open(filepath)
+    ws = wb.Worksheets('ALPHA AM & AD')
+    rangeALPHAAM = 'A6:A' + str(ws.max_row)
+    #LastRow = Sheets("ALPHA AM & AD").Range("A" & Sheets("ALPHA AM & AD").Rows.Count).End(xlUp).Row
+
+    ws.Range(rangeALPHAAM).Sort(Key1=ws.Range('A5'), Order1=1, Orientation=1)
+
+    wb.Save()
+    excel.Application.Quit

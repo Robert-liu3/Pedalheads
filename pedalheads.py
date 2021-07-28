@@ -12,7 +12,7 @@ from functionF import *
 #C:\Users\Robert Liu\Desktop\test.xlsx
 
 #variables for instructions
-instruction1 = [sg.Text("Welcome to the Pedalheads registration system!!! \nWhen typing in a file path, the format should be similar to C:\\Users\\Name\\Etc\\file_name")]
+instruction1 = [sg.Text("Thank you for trying my (Robert's) automatic registration system \nWhen typing in a file path, the format should be similar to C:\\Users\\Name\\Etc\\file_name")]
 
 #instruction2 = [sg.Text("When typing in a file path, the format should be similar to", r"C:\Users\Name\Etc\file_name")]
 
@@ -89,5 +89,10 @@ try:
 except:
     raise Exception("Not a valid input, REMINDER you need a file AND the path to the file")
 
+try:
+    orderSorting(str(filepath))
+except:
+    raise Exception("Not a valid input, REMINDER you need a file AND the path to the file")
+    
 exit()
 
