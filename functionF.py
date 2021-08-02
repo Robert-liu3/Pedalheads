@@ -4,6 +4,9 @@ import win32com.client
 import sys
 
 
+#global variables
+NumAM = 0
+NumPM = 0
 
 #calculates the number of registrations
 def numberOfReg(fileloc):
@@ -131,6 +134,7 @@ def allday(fileloc):
     print("NUMBER OF ALL DAY LEVEL 5:", all5, "registrations")
     print("NUMBER OF ALL DAY LEVEL 6:", all6, "registrations")
 
+
 #copies all the half day am and all day in a file
 def copyRow(fileloc,filepath):
     #opening workbook
@@ -216,9 +220,10 @@ def copyRow(fileloc,filepath):
     rangeALPHAAM = 'A6:A' + str(ws5.max_row)
     
     #ws5.Range(rangeALPHAAM).Sort(Key1=ws5.Range('A5'), Order1=1, Orientation=1)
-    
+
     #creating a new file
     wb2.save(filepath)
+    NumAM = ws5.max_row
 
 
 def orderSorting(filepath):
@@ -228,7 +233,7 @@ def orderSorting(filepath):
     #opening the excel file that was JUST created from the previous function
     wb = excel.Workbooks.Open(filepath)
     ws = wb.Worksheets('ALPHA AM & AD')
-    rangeALPHAAM = 'A6:A' + str(ws.max_row)
+    rangeALPHAAM = 'A6:A' + str(NumAM)
     #LastRow = Sheets("ALPHA AM & AD").Range("A" & Sheets("ALPHA AM & AD").Rows.Count).End(xlUp).Row
 
     ws.Range(rangeALPHAAM).Sort(Key1=ws.Range('A5'), Order1=1, Orientation=1)

@@ -6,7 +6,7 @@ from functionF import *
 
 
 #FILE = (r"c:\Users\rober\Desktop\list.xlsx")
-#C:\Users\rober\OneDrive\Desktop
+#C:\Users\rober\OneDrive\Desktop\
 
 #C:\Users\Robert Liu\Desktop\list.xlsx
 #C:\Users\Robert Liu\Desktop\test.xlsx
