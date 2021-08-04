@@ -1,6 +1,7 @@
 #reading excel files
 import openpyxl
 import win32com.client
+import pandas as pd
 import sys
 
 
@@ -225,18 +226,31 @@ def copyRow(fileloc,filepath):
     wb2.save(filepath)
     NumAM = ws5.max_row
 
-
+#this function doesn't work :( im not sure why, 
+#it's probably cause it can't edit a file that is being created from openpxyl? I'm not sure
 def orderSorting(filepath):
     #not sure what this does
     excel = win32com.client.Dispatch("Excel.Application")
+    print("this works")
 
     #opening the excel file that was JUST created from the previous function
     wb = excel.Workbooks.Open(filepath)
     ws = wb.Worksheets('ALPHA AM & AD')
+    
+    #creating other variables
+    xlAscending = 1
+    xlSortColumns = 0
+    xlYes = 1
+
+
+
     rangeALPHAAM = 'A6:A' + str(NumAM)
     #LastRow = Sheets("ALPHA AM & AD").Range("A" & Sheets("ALPHA AM & AD").Rows.Count).End(xlUp).Row
 
-    ws.Range(rangeALPHAAM).Sort(Key1=ws.Range('A5'), Order1=1, Orientation=1)
+    ws.Range(rangeALPHAAM).Sort(Key1=ws.Range('A5'), Order1=xlAscending,
+                                Key2=ws.Range('B5'), Order2=xlAscending, 
+                                Key3=ws.Range('C5'), Order3=xlAscending,
+                                header=xlYes, Orientation=xlSortColumns)
 
     wb.Save()
     excel.Application.Quit

@@ -89,10 +89,11 @@ try:
 except:
     raise Exception("Not a valid input, REMINDER you need a file AND the path to the file")
 
-try:
-    orderSorting(str(filepath))
-except:
-    raise Exception("Not a valid input, REMINDER you need a file AND the path to the file")
+
+#try:
+    #EorderSorting(str(filepath))
+#except:
+    #raise Exception("Not a valid input, REMINDER you need a file AND the path to the file")
     
 exit()
 
